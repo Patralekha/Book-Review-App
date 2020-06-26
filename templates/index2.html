@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Jekyll v4.0.1">
+    <title>Signin</title>
+
+    <!--link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/sign-in/"-->
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/4.4.1/jquery.min.js"></script>
+
+    <style>
+    body{
+      background-color: #f03e4d;
+    }
+
+    </style>
+    <!-- Custom styles for this template -->
+    <link href="signin.css" rel="stylesheet">
+  </head>
+  <body>
+
+    {% if sign == '1' %}
+     <div class="col-md-4" style="margin:20px auto;">
+     <div class="card my-15" style="background-color:beige;">
+       <h5 class="card-header">Sign in</h5>
+       <div class="card-body">
+         <div class="input-group">
+           <form action="{{url_for('ulogin')}}" method="post">
+           <input type="text" name="email" class="form-control" placeholder="Email id">
+            <input type="password" name="password" class="form-control" placeholder="Password">
+            <input type="Submit" class="btn btn-secondary btn-success"  style="margin-top:5px;" value="Log in">
+              <!--button class="btn btn-secondary"  style="margin-top:5px;" type="button">Go!</button-->
+         </form>
+       </div>
+       </div>
+     </div>
+   </div>
+       {% else %}
+
+       <div class="col-md-4 center" style="margin:20px auto;">
+       <div class="card my-15" style="background-color:beige;">
+         <h5 class="card-header">Register</h5>
+         <div class="card-body">
+           <div class="input-group">
+             <form action="{{url_for('uregister')}}" method="post">
+               <input type="text" name="name" class="form-control" placeholder="Name">
+             <input type="text" name="email" class="form-control" placeholder="Email id">
+              <input type="password" name="password" class="form-control" placeholder="Password ">
+              <input type="Submit" class="btn btn-secondary btn-success"  style="margin-top:5px;" value="Register">
+                <!--button class="btn btn-secondary"  style="margin-top:5px;" type="button">Go!</button-->
+           </form>
+         </div>
+         </div>
+       </div>
+     </div>
+        {% endif %}
+
+
+</body>
+</html>

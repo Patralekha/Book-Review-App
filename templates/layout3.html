@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Book</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/4.4.1/jquery.min.js"></script>
+  <!-- Custom styles for this template -->
+  <link href="css/blog-home.css" rel="stylesheet">
+  <style>
+  body{
+    background-image: radial-gradient(#FF7F50,#FF7F50,#FF7F50);
+    background-repeat: no-repeat;
+    height:100%;
+    background-size:100%;
+  }
+
+  </style>
+
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="#">Book</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="{{url_for('search')}}">Home
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Logged in as {{name}}</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Services</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Contact</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{url_for('logout')}}">Logout</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Page Content -->
+  <div class="container">
+
+    <div class="row">
+
+      <!-- Blog Entries Column -->
+      <div class="col-md-8">
+
+        <h1 class="my-6">Page Heading
+        <small></small>
+      </h1>
+
+        <!-- Blog Post -->
+        <div class="card mb-4 my-4 mx-4" style="border-width:thick;border-color:black;background-color:#34a4eb;">
+
+          <!--div class="card-img-overlay"-->
+          <div class="card-body">
+            <h2 class="card-title">{{title}}</h2>
+            <h3 class="card-title"> Author:{{author}}</h3>
+            <!--h3 class="card-title"> ISBN:{{isbn}}</h3-->
+            {% if goodread %}
+            <div class="my-6">
+            <h1>Goodreads reviews:<h1>
+            <h3 class="my-6"></p>This book received an average score of {{grev[0]}}/5<p></h3>
+            <h3 class="my-6"></p>Goodreads rating: {{grev[1]}}<p></h3>
+            </div>
+          </div>
+            {% else %}
+            <h2 class="my-6"> No Goodreads reviews are available for this book<h2>
+            {% endif %}
+          <!--/div-->
+        <!--/div-->
+        </div>
+
+
+        {% if value %}
+        <label style="font-weight:bold;">Leave a comment</label>
+        <!--div class="input-group"-->
+          <form action="{{ url_for('submitreview') }}" method="post" id="reviewform">
+            <input type="hidden" class="form-control"  name="isbn" value="{{isbn}}">
+          <textarea type="text"  name="review" placeholder="Comment" class="form-control" required="required"></textarea>
+          <div class="input-group mb-3">
+               <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">Rating</span>
+                </div>
+          <input type="number" class="form-control" name="rating" min="0" max="5" step="0.1" width="15" required>
+        </div>
+          </form>
+          <button type="submit" style="color:beige;" class="btn btn-secondary btn-success btn-outline-primary" form="reviewform" value="Submit">Submit</button>
+
+        <!--/div-->
+
+        {% else %}
+        <p><h1> You have already submitted a review for this book.Thank you.</h1></p>
+        {% endif %}
+
+
+        {% if noreview %}
+        <h2 class="my-6"> No reader has left any review  for this book!!Be the first one to review?<h2>
+          {% else %}
+             {% for i in user_reviews %}
+
+          <div class="card mb-4 my-4 mx-4">
+            <div class="card-body" style="background-color:#00ff99;border-radius:8px;">
+              <h2 class="card-title">{{i[0]}} rated this book {{i[1]}}</h2>
+              <h3 class="card-title"> Comment:</h3>
+              <p><h4>{{i[2]}}<h4></p>
+              </div>
+            </div>
+                {% endfor %}
+
+          {% endif %}
+</div>
+
+
+</div>
+
+</div>
+
+  <!-- /.container -->
+
+  <!-- Footer -->
+  <footer class="py-3 fixed-bottom bg">
+    <div class="container">
+      <p class="m-0 text-center text-black">Copyright &copy; Your Website 2019</p>
+    </div>
+    <!-- /.container -->
+  </footer>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>

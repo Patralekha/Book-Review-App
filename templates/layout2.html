@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Search</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/4.4.1/jquery.min.js"></script>
+  <!-- Custom styles for this template -->
+  <link href="css/blog-home.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg  bg fixed-top" style="background-color:pink;">
+    <div class="container">
+      <a class="navbar-brand" href="#" style="font-weight:bold;color:black;">Matching Results</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="#" style="color:black;">Home
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#" style="color:black;">Logged in as {{name}}</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#" style="color:black;">Services</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#" style="color:black;">Contact</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{url_for('logout')}}" style="color:black;">Logout</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Page Content -->
+  <div class="container" style="background-color: #ffff66;">
+
+    <div class="row">
+
+<div class="col-md-8">
+      <!-- Blog Entries Column -->
+      <h1 class="my-6">Page Heading
+      <small></small>
+    </h1>
+
+        <!-- Blog Post -->
+
+     {% if res %}
+        {% for i in booklist %}
+        <div class="card md-4 my-4 mx-4">
+          <!--img class="card-img-top" src="http://placehold.it/750x300" alt="Card image cap"-->
+          <div class="card-body" style="background-color:#ccffff;">
+            <h2 class="card-title">{{ booklist[i][0] }}</h2>
+            <h3 class="card-title">{{ booklist[i][1] }}</h3>
+            <p class="card-text">ISBN:{{i}} Year:{{  booklist[i][2] }}</p>
+            <a href="{{url_for('book',isbn=i,title=booklist[i][0],author=booklist[i][1])}}" class="btn btn-primary">More &rarr;</a>
+          </div>
+        </div>
+         {% endfor %}
+
+         <!-- Pagination -->
+         <ul class="pagination justify-content-center mb-4">
+           <li class="page-item">
+             <a class="page-link" href="#">&larr; Older</a>
+           </li>
+           <li class="page-item disabled">
+             <a class="page-link" href="#">Newer &rarr;</a>
+           </li>
+         </ul>
+
+      {% else %}
+      <div class="col-md-8 my-8"><h1 class="my-8">No Matching Results!!!</h1></div>
+      {% endif %}
+
+    </div>
+</div>
+
+
+<div class="row" style="margin:auto;position:relative;width:75%;">
+
+
+  <!-- Search Widget -->
+        <div class="col-md-4 center">
+        <div class="card my-15" style="background-color:#ffffb3;">
+          <h5 class="card-header">Search</h5>
+          <div class="card-body">
+            <div class="input-group">
+              <form action="{{ url_for('search') }}" method="post">
+              <input type="text" name="isbn" class="form-control" placeholder="ISBN number">
+               <input type="text" name="title" class="form-control" placeholder="Title of the book">
+               <input type="text" name="author" class="form-control" placeholder="Author">
+               <input type="Submit" class="btn btn-lg btn-success"  style="margin-top:5px;" value="Go!">
+                 <!--button class="btn btn-secondary"  style="margin-top:5px;" type="button">Go!</button-->
+
+            </form>
+          </div>
+          </div>
+        </div>
+      </div>
+        <!-- Categories Widget -->
+        <div class="card my-20" style="background-color:#ffffb3;">
+          <h5 class="card-header">Categories Available</h5>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-lg-6">
+                <ul class="list-unstyled mb-0">
+                  <li>
+                    <a href="#">Mystery</a>
+                  </li>
+                  <li>
+                    <a href="#">Drama</a>
+                  </li>
+                  <li>
+                    <a href="#">History</a>
+                  </li>
+                </ul>
+              </div>
+              <div class="col-lg-6">
+                <ul class="list-unstyled mb-0">
+                  <li>
+                    <a href="#">Fiction</a>
+                  </li>
+                  <li>
+                    <a href="#">Romance</a>
+                  </li>
+                  <li>
+                    <a href="#">Comedy</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Side Widget -->
+        <div class="card my-4" style="background-color:#ffffb3;">
+          <h5 class="card-header">API usage</h5>
+          <div class="card-body">
+            To get average score and ratings of a book,use the url: "127.0.0.1/api/&lt;isbn&gt;"
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+    <!-- /.row -->
+
+
+  <!-- /.container -->
+
+  <!-- Footer -->
+  <footer class="py-3 fixed-bottom bg">
+    <div class="container">
+      <p class="m-0 text-center text-black">Copyright &copy; My Website 2020</p>
+    </div>
+    <!-- /.container -->
+  </footer>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>

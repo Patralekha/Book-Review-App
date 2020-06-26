@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Jekyll v4.0.1">
+    <title>Signin</title>
+
+    <!--link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/sign-in/"-->
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/4.4.1/jquery.min.js"></script>
+    </head>
+    <body>
+      {% if s == 1 %}
+      <div class="alert alert-success" role="alert" style="margin:auto auto;">
+           {{text}}
+      </div>
+      {% else %}
+      <div class="alert alert-danger" role="alert" style="margin:auto auto;">
+            {{text}}
+      </div>
+      {% endif %}
+    </body>
+    </html>
